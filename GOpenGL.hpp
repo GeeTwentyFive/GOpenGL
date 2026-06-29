@@ -5905,7 +5905,7 @@ public:
                         this->hglrc = wglCreateContextAttribsARB(this->hdc, 0, _wgl_context_attribs); if (!this->hglrc) ERROR("Failed to create WGL context");
                         if (!wglMakeCurrent(this->hdc, this->hglrc)) ERROR("Failed to make WGL context current");
                 }
-                #else
+                #else // TODO: Test on Linux Wayland:
                 {
                         if (!native_wayland_display) ERROR("Invalid wl_display*");
                         this->egl_display = eglGetDisplay((wl_display*)native_wayland_display); if (this->egl_display == EGL_NO_DISPLAY) ERROR("eglGetDisplay() failed");

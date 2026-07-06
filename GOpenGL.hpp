@@ -5872,6 +5872,7 @@ class GOpenGL { private:
 public:
         explicit GOpenGL(
                 void* native_window_handle,  // HWND on Windows, wl_surface* on Wayland
+		int window_width, int window_height,
                 void* native_wayland_display = nullptr  // wl_display* on Wayland
         ) {
                 #ifdef _WIN32
@@ -5905,7 +5906,7 @@ public:
                         this->hglrc = wglCreateContextAttribsARB(this->hdc, 0, _wgl_context_attribs); if (!this->hglrc) ERROR("Failed to create WGL context");
                         if (!wglMakeCurrent(this->hdc, this->hglrc)) ERROR("Failed to make WGL context current");
                 }
-                #else // TODO: Test on Linux Wayland:
+                #else
                 {
                         if (!native_wayland_display) ERROR("Invalid wl_display*");
                         this->egl_display = eglGetDisplay((wl_display*)native_wayland_display); if (this->egl_display == EGL_NO_DISPLAY) ERROR("eglGetDisplay() failed");
